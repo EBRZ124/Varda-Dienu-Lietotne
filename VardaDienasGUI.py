@@ -18,12 +18,14 @@ def sodienas_teksta_kaste():
     today = datetime.date.today()
     key = (today.month, today.day)
 
+    formatted_string = today.strftime("%B %d, %Y")
+
     if key in dati.datumi_vardi:
         vardu_saraksts = dati.datumi_vardi[key]["vārdi"]
 
-        vardu_frame = tk.Frame(home_page, borderwidth=2, bg="white", padx=20, pady=20)
+        vardu_frame = tk.Frame(home_page, borderwidth=2, bg="white", relief="ridge",padx=20, pady=20)
         vardu_frame.grid(row=1, column=0, padx=10, pady=10)
-
+        tk.Label(vardu_frame, text=formatted_string, font=("Comfortaa", 16, "bold"), fg="black", bg="white").pack(side="top", pady=5)
         for vards in vardu_saraksts:
             tk.Label(vardu_frame, text=vards, font=("Comfortaa", 16), fg="black", bg="white").pack(side="top")
     else:
