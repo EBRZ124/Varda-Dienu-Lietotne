@@ -63,12 +63,5 @@ def dienu_kastes():
     else:
         tk.Label(home_page, text= "Šodien nevienam nav vārda dienas.", font=("Comfortaa", 16), fg="black", bg="white").grid(row=1, column=0, pady=20)
 
-
-
-    
-
 dienu_kastes()
-
 varda_dienas.mainloop()
-
-
