@@ -5,3 +5,5 @@ Mērķis - Ļaut lietotājam zināk, kam ir vārda diena, kā arī kad un kam ir
 # Faili:
 
 dati.py - python vārdnīca ar visiem vārdiem ar attiecīgo datumu
+
+VardaDienasGUI - grafiskā saskarne
