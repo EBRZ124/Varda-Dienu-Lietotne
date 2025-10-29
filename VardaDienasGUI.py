@@ -21,13 +21,13 @@ def sodienas_teksta_kaste():
     if key in dati.datumi_vardi:
         vardu_saraksts = dati.datumi_vardi[key]["vārdi"]
 
-        vardu_frame = tk.Frame(home_page, borderwidth=2, bg="#E6E6E6", padx=20, pady=20)
+        vardu_frame = tk.Frame(home_page, borderwidth=2, bg="white", padx=20, pady=20)
         vardu_frame.grid(row=1, column=0, padx=10, pady=10)
 
         for vards in vardu_saraksts:
-            tk.Label(vardu_frame, text=vards, font=("Comfortaa", 16), fg="black", bg="white").pack(anchor="w")
+            tk.Label(vardu_frame, text=vards, font=("Comfortaa", 16), fg="black", bg="white").pack(side="top")
     else:
-        tk.Label(home_page, text= "Šodien nevienam nav vārda dienas.", font=("Comfortaa", 16), fg="black", bg="white").pack(anchor="w")
+        tk.Label(home_page, text= "Šodien nevienam nav vārda dienas.", font=("Comfortaa", 16), fg="black", bg="white").grid(row=1, column=0, pady=20)
 
 sodienas_teksta_kaste()
 
