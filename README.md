@@ -8,7 +8,7 @@ dati.py - python vārdnīca ar visiem vārdiem ar attiecīgo datumu
 
 VardaDienasGUI - grafiskā saskarne
 
-# Mērķis
+# WIP
 
 - Pievienot interaktīvu kalendāru, kur, uzklikšķinot uz nosacīta datuma, var apskatīt kam ir tajā dienā vārda diena
 
