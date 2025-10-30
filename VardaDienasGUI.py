@@ -34,6 +34,7 @@ class MainWindow(QMainWindow):
 
         title = QLabel("Šodienas vārda dienas")
         title.setFont(QFont("Comfortaa", 24, QFont.Bold))
+        title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet("color: black; background-color: #E6E6E6;")
         self.home_layout.addWidget(title, 0, 1, 1, 3)     
 
