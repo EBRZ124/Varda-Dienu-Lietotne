@@ -15,3 +15,5 @@ VardaDienasGUI - grafiskā saskarne
 - Pievienot iespēju lietotājam meklēt kurā dienā kādam ir vārda diena
 
 - Uz galvenās lapas redzēt iepriekšējās un nākamās dienas svinamos vārdus
+
+- Pārveidot gui tkinter -> QT
