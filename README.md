@@ -16,4 +16,4 @@ VardaDienasGUI - grafiskā saskarne
 
 - Uz galvenās lapas redzēt iepriekšējās un nākamās dienas svinamos vārdus
 
-- Pārveidot gui tkinter -> QT
+- Pārveidot gui tkinter -> QT (Done 30.10.2025.)
