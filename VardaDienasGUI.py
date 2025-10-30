@@ -1,67 +1,96 @@
-import tkinter as tk
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QGridLayout, QVBoxLayout, QFrame
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont
 import datetime
-import dati
+import dati 
 
-varda_dienas = tk.Tk()
-varda_dienas.title("Vārda Dienas")
-varda_dienas.geometry("740x580")
-varda_dienas.configure(bg="#E6E6E6", cursor="star")
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-home_page = tk.Frame(varda_dienas, bg = "#E6E6E6")
-home_page.pack(pady=10)
+        self.setWindowTitle("Vārda Dienas")
+        self.resize(740, 580)
 
-def dienu_kastes():
-    for widget in home_page.winfo_children():
-        widget.destroy()
+        self.container = QWidget()
+        self.setCentralWidget(self.container)
 
-    tk.Label(home_page, text = "Šodienas vārda dienas", bg="#E6E6E6", fg="black", font = ("Comfortaa", 24, "bold")).grid(row=0, column=0, columnspan=3, pady=20) 
-    today = datetime.date.today()
-    tomorrow = today+datetime.timedelta(days=1)
-    yesterday = today-datetime.timedelta(days=1)
+        self.layout = QVBoxLayout(self.container)
 
-    key_today = (today.month, today.day)
-    key_tomorrow = (tomorrow.month, tomorrow.day)
-    key_yesterday = (yesterday.month, yesterday.day)
+        self.home_page = QWidget()
+        self.home_layout = QGridLayout(self.home_page)
+        self.layout.addWidget(self.home_page, alignment=Qt.AlignTop)
 
-    formatted_string_today = today.strftime("%B %d, %Y")
-    formatted_string_tomorrow = tomorrow.strftime("%B %d, %Y")
-    formatted_string_yesterday = yesterday.strftime("%B %d, %Y")
-
-    # Yesterday
-    if key_yesterday in dati.datumi_vardi:
-        vardu_saraksts = dati.datumi_vardi[key_yesterday]["vārdi"]
-
-        vardu_yesterday_frame = tk.Frame(home_page, borderwidth=2, bg="white", relief="ridge",padx=20, pady=20)
-        vardu_yesterday_frame.grid(row=1, column=0, padx=10, pady=10)
-        tk.Label(vardu_yesterday_frame, text=formatted_string_yesterday, font=("Comfortaa", 16, "bold"), fg="black", bg="white").pack(side="top", pady=5)
-        for vards in vardu_saraksts:
-            tk.Label(vardu_yesterday_frame, text=vards, font=("Comfortaa", 16), fg="black", bg="white").pack(side="top")
-    else:
-        tk.Label(home_page, text= "Šodien nevienam nav vārda dienas.", font=("Comfortaa", 16), fg="black", bg="white").grid(row=1, column=0, pady=20)
+        self.dienu_kastes()
     
-    # Today
-    if key_today in dati.datumi_vardi:
-        vardu_saraksts = dati.datumi_vardi[key_today]["vārdi"]
-
-        vardu_today_frame = tk.Frame(home_page, borderwidth=2, bg="white", relief="ridge",padx=20, pady=20)
-        vardu_today_frame.grid(row=1, column=1, padx=10, pady=10)
-        tk.Label(vardu_today_frame, text=formatted_string_today, font=("Comfortaa", 16, "bold"), fg="black", bg="white").pack(side="top", pady=5)
-        for vards in vardu_saraksts:
-            tk.Label(vardu_today_frame, text=vards, font=("Comfortaa", 16), fg="black", bg="white").pack(side="top")
-    else:
-        tk.Label(home_page, text= "Šodien nevienam nav vārda dienas.", font=("Comfortaa", 16), fg="black", bg="white").grid(row=1, column=0, pady=20)
+    def clear_layout(self, layout):
+        while layout.count():
+            item = layout.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
     
-    # Tomorrow
-    if key_tomorrow in dati.datumi_vardi:
-        vardu_saraksts = dati.datumi_vardi[key_tomorrow]["vārdi"]
+    def dienu_kastes(self):
+        self.clear_layout(self.home_layout)
 
-        vardu_tomorrow_frame = tk.Frame(home_page, borderwidth=2, bg="white", relief="ridge",padx=20, pady=20)
-        vardu_tomorrow_frame.grid(row=1, column=2, padx=10, pady=10)
-        tk.Label(vardu_tomorrow_frame, text=formatted_string_tomorrow, font=("Comfortaa", 16, "bold"), fg="black", bg="white").pack(side="top", pady=5)
-        for vards in vardu_saraksts:
-            tk.Label(vardu_tomorrow_frame, text=vards, font=("Comfortaa", 16), fg="black", bg="white").pack(side="top")
-    else:
-        tk.Label(home_page, text= "Šodien nevienam nav vārda dienas.", font=("Comfortaa", 16), fg="black", bg="white").grid(row=1, column=0, pady=20)
+        title = QLabel("Šodienas vārda dienas")
+        title.setFont(QFont("Comfortaa", 24, QFont.Bold))
+        title.setStyleSheet("color: black; background-color: #E6E6E6;")
+        self.home_layout.addWidget(title, 0, 1, 1, 3)     
 
-dienu_kastes()
-varda_dienas.mainloop()
+        today = datetime.date.today()
+        tomorrow = today + datetime.timedelta(days=1)
+        yesterday = today - datetime.timedelta(days=1)
+
+        key_today = (today.month, today.day)
+        key_tomorrow = (tomorrow.month, tomorrow.day)
+        key_yesterday = (yesterday.month, yesterday.day)
+
+        formatted_today = today.strftime("%B %d, %Y")
+        formatted_tomorrow = tomorrow.strftime("%B %d, %Y")
+        formatted_yesterday = yesterday.strftime("%B %d, %Y")
+
+        self.add_day_box(1, 0, key_yesterday, formatted_yesterday, font_size=12)
+
+        self.add_day_box(1, 1, key_today, formatted_today, font_size=16)
+
+        self.add_day_box(1, 2, key_tomorrow, formatted_tomorrow, font_size=12)
+    
+    def add_day_box(self, row, col, key, date_text, font_size=12):
+        if key in dati.datumi_vardi:
+            vardi_saralsts = dati.datumi_vardi[key]["vārdi"]
+
+            frame = QFrame()
+            frame.setFrameShape(QFrame.StyledPanel)
+            frame.setStyleSheet("background-color: white;")
+            frame_layout = QVBoxLayout(frame)
+            frame_layout.setContentsMargins(20, 20, 20, 20)
+            frame_layout.setSpacing(5)
+
+            date_label = QLabel(date_text)
+            date_label.setFont(QFont("Comfortaa", font_size, QFont.Bold))
+            date_label.setAlignment(Qt.AlignCenter)
+            frame_layout.addWidget(date_label)
+
+            for vards in vardi_saralsts:
+                name_label = QLabel(vards)
+                name_label.setFont(QFont("Comfortaa", font_size))
+                name_label.setAlignment(Qt.AlignCenter)
+                frame_layout.addWidget(name_label)
+            
+            self.home_layout.addWidget(frame, row, col)
+        
+        else:
+            empty_label = QLabel("Šodien (kaut kādā veidā) nevienam nav vārda dienas.")
+            empty_label.setFont(QFont("Comfortaa", font_size))
+            empty_label.setAlignment(Qt.AlignCenter)
+            empty_label.setStyleSheet("background-color: white; color: black;")
+            self.home_layout.addWidget(empty_label, row, col)
+
+
+if __name__ == "__main__":
+    app = QApplication([])
+    with open("/Users/evaldsberzins/Desktop/PYTHON/VardaDienas/style.qss", "r") as f:
+        app.setStyleSheet(f.read())
+    window = MainWindow()
+    window.show()
+    app.exec()
