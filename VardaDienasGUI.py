@@ -50,9 +50,12 @@ class MainWindow(QMainWindow):
 
         self.clear_layout(self.home_layout)
 
-        title = QLabel("Šodienas vārda dienas")
+        date_text = self.current_date.strftime("%B %d, %Y")
+
+        title = QLabel(f"{date_text}")
         title.setFont(QFont("Comfortaa", 24, QFont.Bold))
         title.setAlignment(Qt.AlignCenter)
+        title.setStyleSheet("background-color: #141414")
         self.home_layout.addWidget(title, 0, 0, 1, 3)
 
         today = base_date
@@ -69,11 +72,11 @@ class MainWindow(QMainWindow):
 
         #self.add_day_box(1, 0, key_yesterday, formatted_yesterday, font_size=12)
 
-        self.add_day_box(1, 1, key_today, formatted_today, font_size=16)
+        self.add_day_box(1, 1, key_today, font_size=16)
 
         #self.add_day_box(1, 2, key_tomorrow, formatted_tomorrow, font_size=12)
     
-    def add_day_box(self, row, col, key, date_text, font_size=12):
+    def add_day_box(self, row, col, key, font_size=12):
         if key in dati.datumi_vardi:
             vardi_saralsts = dati.datumi_vardi[key]["vārdi"]
 
@@ -84,7 +87,7 @@ class MainWindow(QMainWindow):
             frame_layout.setContentsMargins(20, 20, 20, 20)
             frame_layout.setSpacing(5)
 
-            date_label = QLabel(date_text)
+            date_label = QLabel("Vārda dienas:")
             date_label.setFont(QFont("Comfortaa", font_size, QFont.Bold))
             date_label.setAlignment(Qt.AlignCenter)
             frame_layout.addWidget(date_label)
