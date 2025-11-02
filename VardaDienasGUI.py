@@ -87,7 +87,7 @@ class MainWindow(QMainWindow):
             frame_layout.setContentsMargins(20, 20, 20, 20)
             frame_layout.setSpacing(5)
 
-            date_label = QLabel("Vārda dienas:")
+            date_label = QLabel("Svinamie vārdi:")
             date_label.setFont(QFont("Comfortaa", font_size, QFont.Bold))
             date_label.setAlignment(Qt.AlignCenter)
             frame_layout.addWidget(date_label)
