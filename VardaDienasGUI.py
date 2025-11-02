@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QGridLayout, QVBoxLayout, QFrame
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QGridLayout, QVBoxLayout, QFrame, QCalendarWidget
+from PySide6.QtCore import Qt, QDate
 from PySide6.QtGui import QFont
 import datetime
 import dati 
@@ -21,7 +21,14 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.home_page, alignment=Qt.AlignTop)
 
         self.dienu_kastes()
-    
+
+        # Kalendārs
+        self.calendar = QCalendarWidget()
+        self.calendar.setGridVisible(True)
+        self.calendar.setHorizontalHeaderFormat(QCalendarWidget.ShortDayNames)
+        self.calendar.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
+        self.layout.addWidget(self.calendar)
+
     def clear_layout(self, layout):
         while layout.count():
             item = layout.takeAt(0)
@@ -36,7 +43,7 @@ class MainWindow(QMainWindow):
         title.setFont(QFont("Comfortaa", 24, QFont.Bold))
         title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet("color: black; background-color: #E6E6E6;")
-        self.home_layout.addWidget(title, 0, 1, 1, 3)     
+        self.home_layout.addWidget(title, 0, 0, 1, 3)     
 
         today = datetime.date.today()
         tomorrow = today + datetime.timedelta(days=1)
@@ -86,6 +93,7 @@ class MainWindow(QMainWindow):
             empty_label.setAlignment(Qt.AlignCenter)
             empty_label.setStyleSheet("background-color: white; color: black;")
             self.home_layout.addWidget(empty_label, row, col)
+    
 
 
 if __name__ == "__main__":
