@@ -1,0 +1,39 @@
+QWidget {
+    background-color: #E6E6E6;
+    font-family: "Comfortaa";
+}
+
+QLabel {
+    color: black;
+}
+
+QCalendarWidget {
+    background-color: white;
+    border-radius: 8px;
+}
+
+QCalendarWidget QTableView {
+    selection-background-color: #D3D3D3;
+    border: 1px solid #C0C0C0;
+    background-color: #E6E6E6;
+    color: black;
+    outline: none;
+}
+
+QCalendarWidget QToolButton {
+    font-family: "Comfortaa";
+    font-size: 14px;
+    padding: 4px;
+    color: black;
+    background-color: transparent;
+}
+
+QCalendarWidget QToolButton#qt_calendar_monthbutton,
+QCalendarWidget QToolButton#qt_calendar_yearbutton {
+    font-weight: bold;
+}
+
+QCalendarWidget QHeaderView {
+    background-color: #E6E6E6;
+    font-weight: bold;
+}
