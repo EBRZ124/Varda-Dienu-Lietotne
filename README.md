@@ -10,6 +10,8 @@ VardaDienasGUI - grafiskā saskarne
 
 requirements - teksta fails ar vajadzīgajām bibliotēkām, lai lietotne darbotos
 
+style.qss - widgetu stilizēšana
+
 # WIP
 
 - Pievienot interaktīvu kalendāru, kur, uzklikšķinot uz nosacīta datuma, var apskatīt kam ir tajā dienā vārda diena
